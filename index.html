@@ -1,3 +1,28 @@
-<h1>KENDİ EVİM EMLAK</h1>
-
-<p>Telefon: 0532 364 61 61</p>
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kendi Evim Emlak</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial;background:#f5f6f8;color:#172c3b}header,footer{background:#102b3f;color:white;text-align:center;padding:28px}nav{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;background:white;padding:14px}nav a{color:#102b3f;background:#f1e6d6;padding:12px;border-radius:8px;text-decoration:none}main{max-width:1050px;margin:auto;padding:16px}section{background:white;border-radius:14px;padding:24px;margin:20px 0;scroll-margin-top:20px}.hero{background:#183b53;color:white;text-align:center;padding:45px 20px;border-radius:14px}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}.card{border:1px solid #ddd;padding:18px;border-radius:10px}input,select,textarea{display:block;padding:12px;margin:10px 0;width:100%;max-width:420px;font:inherit}button{padding:12px 18px;background:#102b3f;color:white;border:0;border-radius:8px;font:inherit}.notice{background:#f1e6d6;padding:15px;border-radius:8px}table{border-collapse:collapse;width:100%}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:left}
+</style>
+</head>
+<body>
+<header><h1>KENDİ EVİM EMLAK</h1><p>Güvenle başlayan yeni bir yaşam</p></header>
+<nav><a href="#anasayfa">Ana Sayfa</a><a href="#ilanlar">İlanlar</a><a href="#karsilama">Müşteri Karşılama</a><a href="#danisman">Danışman</a><a href="#yonetici">Yönetici</a></nav>
+<main>
+<div id="anasayfa" class="hero"><h2>Hayalinizdeki eve birlikte ulaşalım</h2><p>İstanbul Esenyurt ve çevresinde gayrimenkul danışmanlığı</p></div>
+<section id="ilanlar"><h2>Öne Çıkan İlanlar</h2><div class="grid"><div class="card"><h3>Bahçeşehir 2+1</h3><strong>4.200.000 TL</strong><p>Danışman: Ayşe</p></div><div class="card"><h3>Esenyurt 3+1</h3><strong>3.750.000 TL</strong><p>Danışman: Hasan</p></div><div class="card"><h3>Beylikdüzü 1+1</h3><strong>2.900.000 TL</strong><p>Danışman: Fatma</p></div></div></section>
+<section id="karsilama"><h2>Müşteri Karşılama</h2><p>Demo: Gerçek SMS gönderilmez. Gerçek müşteri bilgisi girmeyin.</p><select id="customer"><option value="0">Merve Yılmaz</option><option value="1">Ali Demir</option><option value="2">Deniz Kaya</option></select><input id="code" placeholder="Demo kodu: 123456"><button onclick="checkin()">Giriş Yap</button><p id="welcome" class="notice">Giriş bekleniyor.</p><button onclick="document.getElementById('welcome').textContent='Oturum kapatıldı';document.getElementById('code').value=''">Ekranı Temizle</button></section>
+<section id="danisman"><h2>Danışman Paneli — Demo</h2><p id="arrival">Henüz müşteri gelmedi.</p><select id="visit"></select><select id="status"><option>Beğendi</option><option>Beğenmedi</option><option>Düşünmek için süre istedi</option><option>Ödeme bekliyor</option><option>Bütçesi yetmedi</option><option>Vazgeçti</option></select><textarea id="note" placeholder="Görüşme notu"></textarea><button onclick="saveNote()">Notu Kaydet</button><p id="saved"></p></section>
+<section id="yonetici"><h2>Yönetici Paneli — Demo</h2><div id="report">Henüz kayıt yok.</div></section>
+<section><h2>Kurumsal Tanıtım</h2><p>Profesyonel videolar, fotoğraflar ve danışman profilleri sonraki aşamada eklenecek.</p></section>
+</main><footer>KENDİ EVİM EMLAK — Demo</footer>
+<script>
+const people=[['Merve Yılmaz','Ayşe Hanım',3],['Ali Demir','Hasan Bey',1],['Deniz Kaya','Fatma Hanım',2]],records=[];
+function checkin(){let code=document.getElementById('code').value.trim(),out=document.getElementById('welcome');if(code!=='123456'){out.textContent='Kod yanlış. Demo kodu 123456';return}let p=people[Number(document.getElementById('customer').value)];records.push({name:p[0],agent:p[1],desk:p[2],status:'Geldi',note:'',time:new Date().toLocaleTimeString('tr-TR')});out.textContent='Hoş geldiniz '+p[0]+'. '+p[1]+' ile görüşmek için '+p[2]+' numaralı masaya geçin.';render()}
+function saveNote(){let i=Number(document.getElementById('visit').value);if(!records[i])return;records[i].status=document.getElementById('status').value;records[i].note=document.getElementById('note').value;document.getElementById('saved').textContent='Kaydedildi';render()}
+function render(){document.getElementById('visit').innerHTML=records.map((r,i)=>'<option value="'+i+'">'+r.name+'</option>').join('');document.getElementById('arrival').textContent=records.length?'Son gelen: '+records[records.length-1].name:'Henüz müşteri gelmedi';let root=document.getElementById('report');root.textContent='';let table=document.createElement('table');records.forEach(r=>{let tr=document.createElement('tr');[r.time,r.name,r.agent,r.desk,r.status,r.note].forEach(v=>{let td=document.createElement('td');td.textContent=v;tr.appendChild(td)});table.appendChild(tr)});root.appendChild(table)}
+</script>
+</body></html>
